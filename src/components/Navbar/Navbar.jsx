@@ -1,37 +1,47 @@
 // src/components/Navbar.jsx
-import { Link } from "react-router-dom";
+
 import {
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
   IconButton,
   Image,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
-  useDisclosure,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
+
+import { FaEnvelope } from "react-icons/fa"; // Import the envelope icon
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { useMediaQueryContext } from "../../context/MediaQueryContext";
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra hook to handle drawer state
-  const { isMobile, isTablet } = useMediaQueryContext(); // Use both mobile and tablet queries
+  const { isMobile } = useMediaQueryContext(); // Use both mobile and tablet queries
 
-  // Adjust left position based on screen size (mobile, tablet, desktop)
-  const logoLeftPosition = isMobile
-    ? "25%" // For mobile
-    : isTablet
-    ? "45%" // For tablet
-    : "50%"; // For desktop
+  const handleGetQuoteClick = () => {
+    // Trigger the mailto link when the "Get Quote" button is clicked
+    window.location.href =
+      "mailto:info@aartimultiservices.com?subject=Request for Quote&body=I would like to discuss my project needs.";
+  };
 
   return (
-    <Box as="nav" p={4} bg="#E2E8F0">
-      <Flex align="center" justify="space-between" h="60px" position="relative">
+    <Box as="nav" p={4} bg="transparent">
+      <Flex
+        align="center"
+        justify={"space-between"}
+        h="60px"
+        position="relative"
+        maxW="1200px" // Max width for the navbar container
+        mx="auto" // Center the navbar on larger screens
+        px={1} // Padding for mobile
+      >
         {/* Left: Menu Button */}
         <IconButton
           icon={<HamburgerIcon />}
@@ -39,26 +49,43 @@ function Navbar() {
           colorScheme="teal"
           variant="outline"
           onClick={onOpen} // Open the drawer on click
+          display={{
+            base: "inline-flex",
+            md: "inline-flex",
+          }} // Show on mobile only
         />
 
         {/* Center: Company Logo */}
         <Box
-          position="absolute"
-          left={logoLeftPosition} // Change logo position based on screen size
-          transform={isMobile ? "none" : "translateX(-50%)"} // Only apply translate for desktop
+          mx={{ base: "auto", md: "0" }} // Center on mobile, align left on desktop
+          flex="1" // Allow logo to take up more space on smaller screens
+          display="flex"
+          justifyContent={{ base: "center", md: "center" }} // Center on mobile, left-align on desktop
         >
           <Image
             src={logo}
             alt="Company Logo"
-            boxSize={isMobile ? "100px" : "150px"} // Adjust logo size for mobile
+            boxSize={{ base: "100px", md: "150px" }} // Adjust logo size for mobile
             objectFit="contain"
           />
         </Box>
 
-        {/* Right: Contact Us Button */}
-        <Button colorScheme="blue" size="lg">
-          Get Quotes
-        </Button>
+        {/* Right: Get Quotes Button or Icon based on screen size */}
+        <Box display="flex" alignItems="center" onClick={handleGetQuoteClick}>
+          {isMobile ? (
+            <IconButton
+              icon={<FaEnvelope />}
+              aria-label="Get Quotes"
+              colorScheme="blue"
+              size="lg"
+              ml="auto" // Push the icon to the far right on mobile
+            />
+          ) : (
+            <Button colorScheme="blue" size="lg" ml="auto">
+              Get Quotes
+            </Button>
+          )}
+        </Box>
       </Flex>
 
       {/* Fullscreen Drawer Menu */}

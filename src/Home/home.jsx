@@ -1,15 +1,15 @@
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
 import { Box } from "@chakra-ui/react";
+import ContactUs from "../components/ContactUs/ContactUs";
+import Footer from "../components/Footer/Footer";
 import Hero from "../components/Hero/Hero";
-import Services from "../components/Services/Services";
-import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
+import Navbar from "../components/Navbar/Navbar";
 import Portfolio from "../components/Portfolio/Portfolio";
-import Testimonials from "../components/Testimonials/Testimonials";
+import QuoteSection from "../components/QuoteSection/QuoteSection";
+import Services from "../components/Services/Services";
 import Statistics from "../components/Statistics/Statistics";
 import TeamSection from "../components/TeamSection/TeamSection";
-import QuoteSection from "../components/QuoteSection/QuoteSection";
-import ContactUs from "../components/ContactUs/ContactUs";
+import Testimonials from "../components/Testimonials/Testimonials";
+import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
 
 function Home() {
   return (

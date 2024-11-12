@@ -1,14 +1,14 @@
 import {
   Box,
-  Text,
   Button,
+  Text,
 } from "@chakra-ui/react";
 
 const QuoteSection = () => {
   const handleGetQuoteClick = () => {
     // Trigger the mailto link when the "Get Quote" button is clicked
     window.location.href =
-      "mailto:your-email@example.com?subject=Request for Quote&body=I would like to discuss my project needs.";
+      "mailto:info@aartimultiservices.com?subject=Request for Quote&body=I would like to discuss my project needs.";
   };
 
   return (
@@ -32,7 +32,7 @@ const QuoteSection = () => {
 
       {/* Get Quote Button */}
       <Button
-        onClick={handleGetQuoteClick}
+        onClick={handleGetQuoteClick}         
         colorScheme="blue"
         size="lg"
         variant="solid"

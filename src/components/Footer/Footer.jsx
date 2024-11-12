@@ -1,36 +1,44 @@
+// src/components/Footer.jsx
+
 import {
   Box,
   Flex,
-  Text,
-  Link,
-  useColorModeValue,
   Icon,
-  SimpleGrid,
-  Stack,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
-  Image,
+  Link,
+  SimpleGrid,
+  Stack,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
+  FaEnvelope,
   FaFacebook,
   FaInstagram,
-  FaTwitter,
   FaLinkedin,
-  FaEnvelope,
-  FaPaperPlane,
   FaMapMarker,
+  FaPaperPlane,
   FaPhoneAlt,
+  FaTwitter,
 } from "react-icons/fa";
 
+import backgroundImageUrl from "../../assets/images/footer-background.png";
 import logoUrl from "../../assets/images/amslogo.png";
-import backgroundImageUrl from "../../assets/images/footer-background.png"; // Import background image
 
 const Footer = () => {
   const textColor = useColorModeValue("gray.700", "gray.200");
 
   return (
-    <Box position="relative" color={textColor} py={10} textAlign="center">
+    <Box
+      position="relative"
+      color={textColor}
+      py={10}
+      textAlign="center"
+      minH={{ base: "70vh", md: "60vh", lg: "75vh" }}
+    >
       {/* Background image overlay with opacity */}
       <Box
         position="absolute"
@@ -38,34 +46,48 @@ const Footer = () => {
         left="0"
         right="0"
         bottom="0"
-        bgImage={`url(${backgroundImageUrl})`} // Set background image
+        bgImage={`url(${backgroundImageUrl})`}
         bgPosition="center"
         bgRepeat="no-repeat"
-        bgSize="cover" // Ensure the image covers the footer area
-        opacity="0.2" // Adjust the image opacity here
-        zIndex="1" // Place it behind the content
+        bgSize="cover"
+        opacity="0.2"
+        zIndex="1"
       />
 
       <Flex
-        alignItems="center"
-        justifyContent="center"
+        alignItems={{ base: "flex-start", md: "center" }}
+        justifyContent={{ base: "flex-start", md: "center" }}
         flexDirection={{ base: "column", lg: "row" }}
-        gap={5}
+        gap={8}
+        width={{ base: "100%", lg: "80%" }}
+        margin={{ lg: "auto" }}
+        zIndex="2"
       >
         <Stack
           alignItems="center"
           justifyContent="center"
           flexDirection="column"
-          spacing={5}
+          spacing={3}
         >
           <Flex alignItems="center">
-            <Image src={logoUrl} alt="TechnoIT Logo" height="40px" />
+            <Image
+              src={logoUrl}
+              alt="TechnoIT Logo"
+              height={{ base: "40px", md: "50px" }}
+            />
           </Flex>
-          <Text fontSize="sm" color={"#fff"}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem
-            ipsum dolor sit amet.
+
+          <Text
+            fontSize="sm"
+            fontWeight="bold"
+            color={"#fff"}
+            px={{ base: 4, md: 0 }}
+          >
+            We collaborate with industry leaders to deliver top-notch services
+            and innovative solutions, ensuring our clients receive the best in
+            infrastructure, IT, marketing, and more.
           </Text>
+
           <Text fontSize="sm" fontWeight="bold" color={"#fff"}>
             Follow us
           </Text>
@@ -84,105 +106,104 @@ const Footer = () => {
             </Link>
           </Flex>
         </Stack>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-          <Stack spacing={2}>
+
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} textAlign="left">
+          <Stack spacing={2} align="flex-start">
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Services
             </Text>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Web Design
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               App Development
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Cloud Services
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Domain And Hosting
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               SEO Optimization
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Social Media
             </Link>
           </Stack>
-          <Stack spacing={2}>
+
+          <Stack spacing={2} align="flex-start">
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Information
             </Text>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               About
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Pricing
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Team
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Portfolio
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               FAQs
             </Link>
-            <Link href="#" color={"#fff"}>
-              Team
-            </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Blogs
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Blog Details
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Coming Soon
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Terms & Conditions
             </Link>
-            <Link href="#" color={"#fff"}>
+            <Link color="#fff" fontWeight="bold">
               Privacy Policy
             </Link>
           </Stack>
-          <Stack spacing={2}>
+
+          <Stack spacing={2} align="flex-start">
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Contacts
             </Text>
-            <Link href="#">
-              <Icon as={FaMapMarker} fontSize="lg" color={"#fff"} />
-              <Text color={"#fff"}>
-                101 West Town, PBO 12345, United States
-              </Text>
-            </Link>
-            <Link href="#">
-              <Icon as={FaPhoneAlt} fontSize="lg" color={"#fff"} />
-              <Text color={"#fff"}>+1 1234 56 789</Text>
-            </Link>
-            <Link href="#">
-              <Icon as={FaEnvelope} fontSize="lg" color={"#fff"} />
-              <Text color={"#fff"}>contact@example.com</Text>
-            </Link>
-            <Text fontSize="lg" fontWeight="bold" color={"#fff"}>
+            <Flex align="center" color="#fff" fontWeight="bold">
+              <Icon as={FaMapMarker} mr={2} /> Flat No. 101, Prathamesh Plaza,
+              Unthkhana Road, Above Peter England Showroom, Medical sq., Nagpur,
+              440009.
+            </Flex>
+            <Flex align="center" color="#fff" fontWeight="bold">
+              <Icon as={FaPhoneAlt} mr={2} /> Phone: +91 9067000315 / +91
+              9067000316
+            </Flex>
+            <Flex align="center" color="#fff" fontWeight="bold">
+              <Icon as={FaEnvelope} mr={2} /> Email: info@aartimultiservices.com
+            </Flex>
+            <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Newsletter
             </Text>
-            <Text fontSize="sm" color="gray.600">
-              Don&apos;t miss to subscribe to our new feeds, kindly fill the
-              form below.
+            <Text color="gray.400" fontSize="sm" fontWeight="bold">
+              Don&apos;t miss to subscribe to our new feeds.
             </Text>
-
             <InputGroup>
               <Input placeholder="Email Address" size="md" borderRadius="md" />
-              <InputRightElement>
-                <Icon as={FaPaperPlane} color={"#fff"} />
-              </InputRightElement>
+              <InputRightElement
+                // eslint-disable-next-line react/no-children-prop
+                children={<Icon as={FaPaperPlane} color={"#fff"} />}
+              />
             </InputGroup>
           </Stack>
         </SimpleGrid>
       </Flex>
-      <Text fontSize="xs" mt={5} color={"#fff"}>
-        Technoit © 2023 - Designed by Zz Themes
+
+      <Text fontSize="xs" mt={5} color={"#fff"} fontWeight="bold">
+        © Copyright Aarti Multi Services Pvt. Ltd All Rights Reserved Created by
+        Aarti Multi Services Team
       </Text>
     </Box>
   );
