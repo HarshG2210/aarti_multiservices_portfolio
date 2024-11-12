@@ -15,7 +15,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-// import logo from "../../assets/logo.png";
+import logo from "../../assets/images/logo.png";
 import { useMediaQueryContext } from "../../context/MediaQueryContext";
 
 function Navbar() {
@@ -48,7 +48,7 @@ function Navbar() {
           transform={isMobile ? "none" : "translateX(-50%)"} // Only apply translate for desktop
         >
           <Image
-            // src={logo}
+            src={logo}
             alt="Company Logo"
             boxSize={isMobile ? "100px" : "150px"} // Adjust logo size for mobile
             objectFit="contain"
@@ -56,8 +56,8 @@ function Navbar() {
         </Box>
 
         {/* Right: Contact Us Button */}
-        <Button as={Link} to="/contact" colorScheme="green">
-          Contact Us
+        <Button colorScheme="blue" size="lg">
+          Get Quotes
         </Button>
       </Flex>
 
