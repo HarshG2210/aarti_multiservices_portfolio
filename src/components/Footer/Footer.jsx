@@ -37,7 +37,8 @@ const Footer = () => {
       color={textColor}
       py={10}
       textAlign="center"
-      minH={{ base: "70vh", md: "60vh", lg: "75vh" }}
+      minH={{ base: "70vh", md: "60vh", lg: "65vh" }}
+      bg={"black"}
     >
       {/* Background image overlay with opacity */}
       <Box
@@ -53,61 +54,60 @@ const Footer = () => {
         opacity="0.2"
         zIndex="1"
       />
-
       <Flex
         alignItems={{ base: "flex-start", md: "center" }}
         justifyContent={{ base: "flex-start", md: "center" }}
         flexDirection={{ base: "column", lg: "row" }}
         gap={8}
-        width={{ base: "100%", lg: "80%" }}
+        width={{ base: "100%", lg: "90%" }}
         margin={{ lg: "auto" }}
         zIndex="2"
       >
-        <Stack
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-          spacing={3}
-        >
-          <Flex alignItems="center">
-            <Image
-              src={logoUrl}
-              alt="TechnoIT Logo"
-              height={{ base: "40px", md: "50px" }}
-            />
-          </Flex>
-
-          <Text
-            fontSize="sm"
-            fontWeight="bold"
-            color={"#fff"}
-            px={{ base: 4, md: 0 }}
+        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={8} textAlign="left">
+          <Stack
+            spacing={2}
+            align="flex-start"
+            justify="flex-start"
+            alignItems="center"
           >
-            We collaborate with industry leaders to deliver top-notch services
-            and innovative solutions, ensuring our clients receive the best in
-            infrastructure, IT, marketing, and more.
-          </Text>
+            <Flex alignItems="center">
+              <Image
+                src={logoUrl}
+                alt="TechnoIT Logo"
+                height={{ base: "40px", md: "50px" }}
+              />
+            </Flex>
 
-          <Text fontSize="sm" fontWeight="bold" color={"#fff"}>
-            Follow us
-          </Text>
-          <Flex gap={3}>
-            <Link href="#">
-              <Icon as={FaTwitter} fontSize="lg" color={"#fff"} />
-            </Link>
-            <Link href="#">
-              <Icon as={FaFacebook} fontSize="lg" color={"#fff"} />
-            </Link>
-            <Link href="#">
-              <Icon as={FaInstagram} fontSize="lg" color={"#fff"} />
-            </Link>
-            <Link href="#">
-              <Icon as={FaLinkedin} fontSize="lg" color={"#fff"} />
-            </Link>
-          </Flex>
-        </Stack>
+            <Text
+              fontSize="sm"
+              fontWeight="bold"
+              color={"#fff"}
+              textAlign={"center"}
+              px={{ base: 4, md: 0 }}
+            >
+              We collaborate with industry leaders to deliver top-notch services
+              and innovative solutions, ensuring our clients receive the best in
+              infrastructure, IT, marketing, and more.
+            </Text>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} textAlign="left">
+            <Text fontSize="sm" fontWeight="bold" color={"#fff"}>
+              Follow us
+            </Text>
+            <Flex gap={3}>
+              <Link href="#">
+                <Icon as={FaTwitter} fontSize="lg" color={"#fff"} />
+              </Link>
+              <Link href="#">
+                <Icon as={FaFacebook} fontSize="lg" color={"#fff"} />
+              </Link>
+              <Link href="#">
+                <Icon as={FaInstagram} fontSize="lg" color={"#fff"} />
+              </Link>
+              <Link href="#">
+                <Icon as={FaLinkedin} fontSize="lg" color={"#fff"} />
+              </Link>
+            </Flex>
+          </Stack>
           <Stack spacing={2} align="flex-start">
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Services
@@ -136,7 +136,7 @@ const Footer = () => {
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Information
             </Text>
-            <Link color="#fff" fontWeight="bold">
+            <Link color="#fff" fontWeight="bold" href="/about">
               About
             </Link>
             <Link color="#fff" fontWeight="bold">
@@ -155,13 +155,7 @@ const Footer = () => {
               Blogs
             </Link>
             <Link color="#fff" fontWeight="bold">
-              Blog Details
-            </Link>
-            <Link color="#fff" fontWeight="bold">
               Coming Soon
-            </Link>
-            <Link color="#fff" fontWeight="bold">
-              Terms & Conditions
             </Link>
             <Link color="#fff" fontWeight="bold">
               Privacy Policy
@@ -178,11 +172,10 @@ const Footer = () => {
               440009.
             </Flex>
             <Flex align="center" color="#fff" fontWeight="bold">
-              <Icon as={FaPhoneAlt} mr={2} /> Phone: +91 9067000315 / +91
-              9067000316
+              <Icon as={FaPhoneAlt} mr={2} /> +91 9067000315 / +91 9067000316
             </Flex>
             <Flex align="center" color="#fff" fontWeight="bold">
-              <Icon as={FaEnvelope} mr={2} /> Email: info@aartimultiservices.com
+              <Icon as={FaEnvelope} mr={2} /> info@aartimultiservices.com
             </Flex>
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Newsletter
@@ -201,7 +194,13 @@ const Footer = () => {
         </SimpleGrid>
       </Flex>
 
-      <Text fontSize="xs" mt={5} color={"#fff"} fontWeight="bold">
+      <Text
+        fontSize="xs"
+        mt={5}
+        color={"#fff"}
+        fontWeight="bold"
+        border={"1px sloid red"}
+      >
         © Copyright Aarti Multi Services Pvt. Ltd All Rights Reserved Created by
         Aarti Multi Services Team
       </Text>

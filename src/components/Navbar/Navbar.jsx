@@ -62,12 +62,15 @@ function Navbar() {
           display="flex"
           justifyContent={{ base: "center", md: "center" }} // Center on mobile, left-align on desktop
         >
-          <Image
-            src={logo}
-            alt="Company Logo"
-            boxSize={{ base: "100px", md: "150px" }} // Adjust logo size for mobile
-            objectFit="contain"
-          />
+          <Link to="/">
+            {/* Wrap the logo in a Link */}
+            <Image
+              src={logo}
+              alt="Company Logo"
+              boxSize={{ base: "100px", md: "150px" }} // Adjust logo size for mobile
+              objectFit="contain"
+            />
+          </Link>
         </Box>
 
         {/* Right: Get Quotes Button or Icon based on screen size */}
@@ -104,34 +107,42 @@ function Navbar() {
             <VStack spacing={6} mt={10} align="center">
               <Button
                 as={Link}
-                to="/about"
+                to="/Services"
                 colorScheme="teal"
                 onClick={onClose}
               >
-                About Us
+                Our Services
               </Button>
               <Button
                 as={Link}
-                to="/flatProject"
+                to="/whyChooseUs"
                 colorScheme="teal"
                 onClick={onClose}
               >
-                Flat Projects
+                Why Choose Us
               </Button>
               <Button
                 as={Link}
-                to="/plotProject"
+                to="/portfolio"
                 colorScheme="teal"
                 onClick={onClose}
               >
-                Plot Projects
-              </Button>
-              <Button as={Link} to="/blog" colorScheme="teal" onClick={onClose}>
-                Blog
+                Portfolio
               </Button>
               <Button
                 as={Link}
-                to="/contact"
+                to="/testimonials"
+                colorScheme="teal"
+                onClick={onClose}
+              >
+                Testimonials
+              </Button>
+              <Button as={Link} to="/team" colorScheme="teal" onClick={onClose}>
+                Meet My Team
+              </Button>
+              <Button
+                as={Link}
+                to="/contactUs"
                 colorScheme="teal"
                 onClick={onClose}
               >
