@@ -6,9 +6,9 @@ function Breadcrumbs() {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <Breadcrumb fontWeight="medium" fontSize="lg" p={4} bg={"#015ade"}>
+    <Breadcrumb fontWeight="medium" fontSize="lg" p={4} bg={"#2e79ba"}>
       <BreadcrumbItem>
-        <BreadcrumbLink as={RouterLink} to="/" color={"white"}>
+        <BreadcrumbLink as={RouterLink} to="/" color={"black"}>
           Home
         </BreadcrumbLink>
       </BreadcrumbItem>
