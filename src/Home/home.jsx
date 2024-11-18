@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import ContactUs from "../components/ContactUs/ContactUs";
+import Footer from "../components/Footer/Footer";
 import Hero from "../components/Hero/Hero";
 import Portfolio from "../components/Portfolio/Portfolio";
 import QuoteSection from "../components/QuoteSection/QuoteSection";
@@ -42,6 +43,9 @@ function Home() {
 
       {/* ContactUs */}
       <ContactUs />
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

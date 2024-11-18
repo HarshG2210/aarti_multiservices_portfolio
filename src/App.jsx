@@ -26,9 +26,9 @@ function App() {
   return (
     <Router>
       <Routes>
+          <Route index element={<Home />} /> 
         {/* Root route using RootLayout as the wrapper */}
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} /> {/* Default home page */}
           <Route path="services" element={<Services />} />
           <Route path="whyChooseUs" element={<WhyChooseUs />} />
           <Route path="portfolio" element={<Portfolio />} />

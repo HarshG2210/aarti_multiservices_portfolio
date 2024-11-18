@@ -1,20 +1,20 @@
 import {
   Box,
   Grid,
-  Heading,
   HStack,
+  Heading,
   Icon,
+  Image,
   Text,
   VStack,
-  Image,
 } from "@chakra-ui/react";
 import {
+  FaClock,
+  FaDollarSign,
   FaFileAlt,
+  FaHeadset,
   FaLightbulb,
   FaUserFriends,
-  FaDollarSign,
-  FaClock,
-  FaHeadset,
 } from "react-icons/fa";
 
 function WhyChooseUs() {
@@ -22,19 +22,19 @@ function WhyChooseUs() {
     {
       title: "Experience",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "With years of industry expertise, we bring in-depth knowledge and proven strategies to deliver reliable and innovative solutions for our clients.",
       icon: FaFileAlt,
     },
     {
       title: "Products",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Our products are crafted with the highest quality standards, ensuring performance, durability, and satisfaction for all your needs.",
       icon: FaLightbulb,
     },
     {
       title: "Approach",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "We take a customer-centric approach, focusing on understanding your unique requirements to provide tailored solutions that drive results.",
       icon: FaUserFriends,
     },
   ];
@@ -43,43 +43,45 @@ function WhyChooseUs() {
     {
       title: "Pricing",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "We offer competitive pricing without compromising quality, making our services accessible and cost-effective for businesses of all sizes.",
       icon: FaDollarSign,
     },
     {
       title: "Delivery",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Our efficient processes ensure timely delivery, so you can rely on us to meet your project deadlines and keep your operations running smoothly.",
       icon: FaClock,
     },
     {
       title: "Support",
       description:
-        "Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Our dedicated support team is available to assist you at every step, providing prompt and reliable service whenever you need it.",
       icon: FaHeadset,
     },
   ];
 
   return (
-    <Box bg="gray.50" py={16} px={{ base: 6, md: 12 }}>
+    <Box bg="gray.50" py={16} px={{ base: 6, md: 12 }} >
       <VStack spacing={2} mb={12} textAlign="center">
         <Heading color="blue.600" fontSize="3xl">
           Why Choose Us
         </Heading>
-        <Text color="orange.500" fontSize="lg">
-          Lorem ipsum dolor sit amet
-        </Text>
       </VStack>
 
       <Grid
-        templateColumns={{ base: "1fr", lg: "1fr auto 1fr" }}
+        templateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
         gap={8}
         alignItems="center"
       >
         {/* Left Column */}
-        <VStack spacing={8} align="flex-end" textAlign="right">
+        <VStack
+          spacing={8}
+          align="flex-end"
+          textAlign="right"
+          maxW={{ base: "xs", md: "sm", lg: "xs" }} // Adjusted maxWidth
+        >
           {leftItems.map((item, index) => (
-            <HStack key={index} spacing={4} maxW="xs">
+            <HStack key={index} spacing={4}>
               <Box>
                 <Heading size="md" color="gray.700">
                   {item.title}
@@ -100,9 +102,14 @@ function WhyChooseUs() {
         />
 
         {/* Right Column */}
-        <VStack spacing={8} align="flex-start" textAlign="left">
+        <VStack
+          spacing={8}
+          align="flex-start"
+          textAlign="left"
+          maxW={{ base: "xs", md: "sm", lg: "xs" }} // Adjusted maxWidth
+        >
           {rightItems.map((item, index) => (
-            <HStack key={index} spacing={4} maxW="xs">
+            <HStack key={index} spacing={4}>
               <Icon as={item.icon} boxSize={8} color="blue.500" />
               <Box>
                 <Heading size="md" color="gray.700">
