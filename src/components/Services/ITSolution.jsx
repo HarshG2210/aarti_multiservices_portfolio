@@ -1,10 +1,12 @@
 import {
   Box,
+  Center,
   Divider,
   Grid,
   GridItem,
   Heading,
   Image,
+  Spinner,
   Stack,
   Tab,
   TabList,
@@ -23,8 +25,24 @@ import {
   MdTrendingUp,
   MdWeb,
 } from "react-icons/md";
+import { useEffect, useState } from "react";
 
 export default function ITSolution() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Simulating a data fetch with setTimeout
+    setTimeout(() => {
+      setLoading(false); // Data has loaded, so we set loading to false
+    }, 2000); // 2 seconds for demonstration
+  }, []);
+
+  if (loading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
   return (
     <Box>
       <Heading

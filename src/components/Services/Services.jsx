@@ -1,8 +1,10 @@
 import {
   Box,
+  Center,
   Link as ChakraLink,
   Grid,
   Heading,
+  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -14,10 +16,14 @@ import {
   FaServer,
   FaSolarPanel,
 } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Services() {
+  const [loading, setLoading] = useState(true);
+
   const services = [
     {
       title: "IT Solution",
@@ -63,6 +69,21 @@ function Services() {
     },
   ];
 
+  useEffect(() => {
+    // Simulate a data fetch
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds delay for demonstration
+  }, []);
+
+  if (loading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
+
   return (
     <Box bg="gray.50" p={10} id="services">
       <Heading textAlign="center" mb={10} color="blue.600">
@@ -70,33 +91,40 @@ function Services() {
       </Heading>
       <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={8}>
         {services.map((service, index) => (
-          <ChakraLink
-            as={Link}
-            to={service.path}
+          <motion.div
             key={index}
-            _hover={{ textDecoration: "none" }}
+            whileInView={{ opacity: 1, y: 0 }} // Animation when in view
+            initial={{ opacity: 0, y: 50 }} // Initial state
+            viewport={{ once: false, margin: "-50px" }} // Animation triggers every time it enters the viewport
+            transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered animation
           >
-            <VStack
-              p={6}
-              bg="white"
-              boxShadow="md"
-              borderRadius="md"
-              textAlign="center"
-              spacing={4}
-              height="300px" // Set a fixed height for uniformity
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-between"
+            <ChakraLink
+              as={Link}
+              to={service.path}
+              _hover={{ textDecoration: "none" }}
             >
-              <Box as={service.icon} boxSize={10} color="blue.500" />
-              <Heading size="md" color="gray.700">
-                {service.title}
-              </Heading>
-              <Text color="gray.500" flex="1" overflow="hidden">
-                {service.description}
-              </Text>
-            </VStack>
-          </ChakraLink>
+              <VStack
+                p={6}
+                bg="white"
+                boxShadow="md"
+                borderRadius="md"
+                textAlign="center"
+                spacing={4}
+                height="300px" // Set a fixed height for uniformity
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+              >
+                <Box as={service.icon} boxSize={10} color="blue.500" />
+                <Heading size="md" color="gray.700">
+                  {service.title}
+                </Heading>
+                <Text color="gray.500" flex="1" overflow="hidden">
+                  {service.description}
+                </Text>
+              </VStack>
+            </ChakraLink>
+          </motion.div>
         ))}
       </Grid>
     </Box>

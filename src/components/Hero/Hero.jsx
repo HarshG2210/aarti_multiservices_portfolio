@@ -1,12 +1,14 @@
 import {
   Box,
   Button,
+  Center,
   Link as ChakraLink,
   Flex,
   HStack,
   Heading,
   Icon,
   Image,
+  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -32,8 +34,8 @@ const services = [
 function LineWaveBackground() {
   const lineRef = useRef();
   const { positions, speeds } = useMemo(() => {
-    const numLines = 15; // Increase the number of lines for a denser effect
-    const positions = new Float32Array(numLines * 2 * 3); // 2 points per line, 3 coordinates per point
+    const numLines = 15;
+    const positions = new Float32Array(numLines * 2 * 3);
     const speeds = Array.from(
       { length: numLines },
       () => Math.random() * 0.5 + 0.1
@@ -125,6 +127,14 @@ function BackgroundScene() {
 function Hero() {
   const { isMobile } = useMediaQueryContext(); // Media query context
   const [currentService, setCurrentService] = useState(0);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Simulating a data fetch with setTimeout
+    setTimeout(() => {
+      setLoading(false); // Data has loaded, so we set loading to false
+    }, 2000); // 2 seconds for demonstration
+  }, []);
+
   // Change the service text every 2 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -134,8 +144,16 @@ function Hero() {
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, []);
 
+  if (loading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
+
   return (
-    <Box position="relative" zIndex="10" bg={"black.900"}>
+    <Box position="relative" zIndex="10" bg={"gray.fg"}>
       {/* Background Animation */}
       <Box
         position="absolute"
@@ -144,6 +162,7 @@ function Hero() {
         right="0"
         height="100%"
         zIndex="0"
+        width="100%"
       >
         <BackgroundScene />
       </Box>
@@ -168,9 +187,7 @@ function Hero() {
             w="100%"
           >
             {/* Illustration Image */}
-            {isMobile ? (
-              ""
-            ) : (
+            {!isMobile && (
               <Box
                 flex="1"
                 textAlign="center"
@@ -178,13 +195,24 @@ function Hero() {
                 maxW="50%"
                 pr={{ md: 10 }} // Adds space between the image and the text
               >
-                <Image
-                  src={illustration} // Replace with your image URL
-                  alt="AI Illustration"
-                  borderRadius="10px"
-                  boxShadow="lg"
-                  maxW="100%" // Ensures the image stays responsive
-                />
+                <motion.div
+                  animate={{
+                    y: [0, -10, 0], // Move up and back to original position
+                  }}
+                  transition={{
+                    duration: 1.5, // Time for one bounce
+                    repeat: Infinity, // Repeat the animation infinitely
+                    repeatType: "loop", // Smooth looping
+                  }}
+                >
+                  <Image
+                    src={illustration} // Replace with your image URL
+                    alt="AI Illustration"
+                    borderRadius="10px"
+                    boxShadow="lg"
+                    maxW="100%" // Ensures the image stays responsive
+                  />
+                </motion.div>
               </Box>
             )}
 

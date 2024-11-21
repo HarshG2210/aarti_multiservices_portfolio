@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,11 +10,13 @@ import {
   Flex,
   IconButton,
   Image,
+  Spinner,
   Text,
   VStack,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import { FaBars } from "react-icons/fa"; // Import FaBars icon
 import { FaEnvelope } from "react-icons/fa"; // Import the envelope icon
@@ -26,7 +29,21 @@ function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra hook to handle drawer state
   const { isMobile } = useMediaQueryContext(); // Use both mobile and tablet queries
   const toast = useToast();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Simulating a data fetch with setTimeout
+    setTimeout(() => {
+      setLoading(false); // Data has loaded, so we set loading to false
+    }, 2000); // 2 seconds for demonstration
+  }, []);
 
+  if (loading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
   const handleGetQuoteClick = () => {
     // Trigger the mailto link when the "Get Quote" button is clicked
     window.location.href =
@@ -37,7 +54,7 @@ function Navbar() {
     <Box
       as="nav"
       p={4}
-      bg="rgba(23, 24, 35, 0.8)"
+      bg="gray.fg"
       position="sticky"
       top="0"
       zIndex="10"
@@ -86,7 +103,7 @@ function Navbar() {
         isOpen={isOpen}
         placement="left"
         onClose={onClose}
-        size={{ base: "sm", md: "md", lg: "lg" }}
+        size={{ base: "sm", md: "lg", lg: "lg" }}
       >
         <DrawerOverlay bg="rgba(23, 24, 35, 0.8)" />
         <DrawerContent
@@ -140,7 +157,7 @@ function Navbar() {
                   mb={4}
                   color="gray.700"
                 >
-                  Navigation
+                  Useful Links
                 </Text>
                 <VStack spacing={4} align="stretch">
                   {[
