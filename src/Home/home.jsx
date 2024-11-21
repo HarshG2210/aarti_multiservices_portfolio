@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import ContactUs from "../components/ContactUs/ContactUs";
 import Footer from "../components/Footer/Footer";
 import Hero from "../components/Hero/Hero";
+import Navbar from "../components/Navbar/Navbar";
 import Portfolio from "../components/Portfolio/Portfolio";
 import QuoteSection from "../components/QuoteSection/QuoteSection";
 import Services from "../components/Services/Services";
@@ -17,6 +18,8 @@ import WhyChooseUs from "../components/WhyChooseUs/WhyChooseUs";
 function Home() {
   return (
     <Box bg="gray.900">
+      {/* Navbar */}
+      <Navbar />
       {/* Hero */}
       <Hero />
 

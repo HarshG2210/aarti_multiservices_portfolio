@@ -2,37 +2,32 @@ import {
   Box,
   Button,
   Link as ChakraLink,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
   Flex,
   HStack,
   Heading,
   Icon,
-  IconButton,
   Image,
   Text,
   VStack,
-  useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  FaEnvelope,
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-} from "react-icons/fa";
-import { useMemo, useRef } from "react";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { FaXTwitter } from "react-icons/fa6";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll"; // Import ScrollLink from react-scroll
 import illustration from "../../assets/images/Illustration.png";
-import logo from "../../assets/images/logo.png";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 import { useMediaQueryContext } from "../../context/MediaQueryContext";
+
+const services = [
+  "IT Solutions",
+  "Infrastructure",
+  "Marketing",
+  "Solar",
+  "Advertisement",
+  "Loan",
+];
 
 function LineWaveBackground() {
   const lineRef = useRef();
@@ -128,15 +123,16 @@ function BackgroundScene() {
 }
 
 function Hero() {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Drawer state
   const { isMobile } = useMediaQueryContext(); // Media query context
-  const toast = useToast();
+  const [currentService, setCurrentService] = useState(0);
+  // Change the service text every 2 seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentService((prev) => (prev + 1) % services.length);
+    }, 4000);
 
-  const handleGetQuoteClick = () => {
-    // Email redirection for quotes
-    window.location.href =
-      "mailto:info@aartimultiservices.com?subject=Request for Quote";
-  };
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, []);
 
   return (
     <Box position="relative" zIndex="10" bg={"black.900"}>
@@ -154,109 +150,10 @@ function Hero() {
 
       {/* Main Content */}
       <Box position="relative" zIndex="1">
-        {/* Navbar */}
-        <Box as="nav" p={4} bg="transparent">
-          <Flex
-            align="center"
-            justify={"space-between"}
-            h="60px"
-            maxW="1200px"
-            mx="auto"
-          >
-            {/* Hamburger Menu for Drawer */}
-            <IconButton
-              icon={<HamburgerIcon />}
-              aria-label="Menu"
-              colorScheme="teal"
-              variant="outline"
-              onClick={onOpen}
-            />
-
-            {/* Company Logo */}
-            <Box flex="1" display="flex" justifyContent="center">
-              <Link to="/">
-                <Image
-                  src={logo}
-                  alt="Logo"
-                  boxSize="120px"
-                  objectFit="contain"
-                />
-              </Link>
-            </Box>
-
-            {/* Get Quote Button */}
-            <Box
-              display="flex"
-              alignItems="center"
-              onClick={handleGetQuoteClick}
-            >
-              {isMobile ? (
-                <IconButton
-                  icon={<FaEnvelope />}
-                  aria-label="Get Quotes"
-                  colorScheme="blue"
-                />
-              ) : (
-                <Button colorScheme="blue" size="lg">
-                  Get Quotes
-                </Button>
-              )}
-            </Box>
-          </Flex>
-
-          {/* Fullscreen Drawer Menu */}
-          <Drawer
-            isOpen={isOpen}
-            placement="left"
-            onClose={onClose}
-            size={{ base: "sm", md: "sm", lg: "lg" }}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerBody>
-                <VStack spacing={6} mt={10} align="center">
-                  {[
-                    "Services",
-                    "WhyChooseUs",
-                    "Portfolio",
-                    "Testimonials",
-                    "Team",
-                    "Contact Us",
-                    "About",
-                    "Pricing",
-                    "FAQs",
-                    "Blog",
-                    "Privacy-Policy",
-                  ].map((item, idx) => (
-                    <Button
-                      as={Link}
-                      to={`/${item.toLowerCase().replace(" ", "")}`}
-                      colorScheme="teal"
-                      key={idx}
-                      onClick={() => {
-                        onClose();
-                        toast({
-                          title: `${item} Clicked`,
-                          status: "info",
-                          duration: 2000,
-                          isClosable: true,
-                        });
-                      }}
-                    >
-                      {item}
-                    </Button>
-                  ))}
-                </VStack>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
-        </Box>
-
         {/* Hero Section */}
         <Box
           color="white"
-          minH="100vh"
+          minH="90vh"
           px={{ base: 6, md: 16 }}
           py={10}
           display="flex"
@@ -308,42 +205,80 @@ function Hero() {
               >
                 Delivering Superior Services
               </Heading>
-              <Text fontSize="3xl" color="blue.300" fontWeight="bold">
-                IT Solutions.
-              </Text>
+              <motion.div
+                key={currentService}
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ duration: 1, type: "spring", stiffness: 50 }}
+              >
+                <Text fontSize="3xl" color="blue.300" fontWeight="bold">
+                  {services[currentService]}
+                </Text>
+              </motion.div>
               <Text fontSize="lg" color="gray.300" maxW="500px">
-                You can easily change any design to your own. It is highly
-                customizable and SEO-friendly.
+                Transform your business with innovative IT solutions, strong
+                infrastructure, effective marketing, sustainable solar energy,
+                impactful advertising, and seamless loan processes.
               </Text>
 
               {/* Action Buttons */}
               <HStack spacing={4}>
-                <Button
-                  size="lg"
-                  colorScheme="blue"
-                  bg="blue.400"
-                  _hover={{ bg: "blue.500" }}
+                <ScrollLink
+                  to="contact-us"
+                  smooth={true}
+                  offset={-70}
+                  duration={5000}
                 >
-                  Get Quotes
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  colorScheme="blue"
-                  borderColor="blue.400"
-                  _hover={{ bg: "blue.500", color: "white" }}
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    colorScheme="blue"
+                    borderColor="blue.400"
+                    _hover={{ bg: "transparent", color: "blue.500" }}
+                    bg={"#2f83cf"}
+                    color={"white"}
+                  >
+                    Contact Us
+                  </Button>
+                </ScrollLink>
+                <ScrollLink
+                  to="services"
+                  smooth={true}
+                  offset={-70}
+                  duration={1000}
                 >
-                  Get Started
-                </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    colorScheme="blue"
+                    borderColor="blue.400"
+                    _hover={{ bg: "blue.500", color: "white" }}
+                  >
+                    Get Started
+                  </Button>
+                </ScrollLink>
               </HStack>
 
               {/* Social Icons */}
               <HStack spacing={6} pt={4}>
                 {[
-                  { icon: FaXTwitter, link: "#" },
-                  { icon: FaFacebook, link: "#" },
-                  { icon: FaLinkedin, link: "#" },
-                  { icon: FaInstagram, link: "#" },
+                  {
+                    icon: FaXTwitter,
+                    link: "https://x.com/i/flow/login?redirect_after_login=%2FAarti_pvtltd",
+                  },
+                  {
+                    icon: FaFacebook,
+                    link: "https://www.facebook.com/people/Aarti-Multi-Services-Pvt-Ltd/61557349604456/",
+                  },
+                  {
+                    icon: FaLinkedin,
+                    link: "https://www.linkedin.com/authwall?trk=bf&trkInfo=AQH4YPdQ0BAoiwAAAZENbYUYCofqYJ-j2Rxpp0z6SW9RUYTFu4ZxQL2tCow09LwFZS_H-s9JQ3zNDA4MOXattkTgA_BX9Ep6sOz078m2aio_ZleNE7YH5lK_TVtB_xRyZqRQX9c=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F102035662%2Fadmin%2Ffeed%2Fposts%2F%3FfeedType%3Dfollowing",
+                  },
+                  {
+                    icon: FaInstagram,
+                    link: "https://www.instagram.com/aartimultiservicespvt.ltd/?igsh=MWIxcHB0ZDlodjAwcg%3D%3D",
+                  },
                 ].map(({ icon, link }, idx) => (
                   <ChakraLink key={idx} href={link} isExternal>
                     <Icon

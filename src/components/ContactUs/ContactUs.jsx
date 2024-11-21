@@ -1,13 +1,14 @@
 import {
   Box,
-  Text,
+  Button,
   FormControl,
   FormLabel,
   Input,
+  Text,
   Textarea,
-  Button,
   useToast,
 } from "@chakra-ui/react";
+
 import { useState } from "react";
 
 const ContactUs = () => {
@@ -53,7 +54,14 @@ const ContactUs = () => {
   };
 
   return (
-    <Box bg="gray.50" py={16} px={8} color="white" textAlign="center">
+    <Box
+      bg="gray.50"
+      py={16}
+      px={8}
+      color="white"
+      textAlign="center"
+      id="contact-us"
+    >
       <Text
         fontSize={{ base: "2xl", md: "3xl" }}
         fontWeight="bold"

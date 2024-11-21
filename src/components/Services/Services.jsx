@@ -64,7 +64,7 @@ function Services() {
   ];
 
   return (
-    <Box bg="gray.50" p={10}>
+    <Box bg="gray.50" p={10} id="services">
       <Heading textAlign="center" mb={10} color="blue.600">
         Our Services
       </Heading>
