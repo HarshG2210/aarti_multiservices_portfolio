@@ -37,7 +37,7 @@ import { useMediaQueryContext } from "../../context/MediaQueryContext";
 function LineWaveBackground() {
   const lineRef = useRef();
   const { positions, speeds } = useMemo(() => {
-    const numLines = 25; // Increase the number of lines for a denser effect
+    const numLines = 15; // Increase the number of lines for a denser effect
     const positions = new Float32Array(numLines * 2 * 3); // 2 points per line, 3 coordinates per point
     const speeds = Array.from(
       { length: numLines },
@@ -209,7 +209,7 @@ function Hero() {
             isOpen={isOpen}
             placement="left"
             onClose={onClose}
-            size="full"
+            size={{ base: "sm", md: "sm", lg: "lg" }}
           >
             <DrawerOverlay />
             <DrawerContent>
@@ -218,11 +218,16 @@ function Hero() {
                 <VStack spacing={6} mt={10} align="center">
                   {[
                     "Services",
-                    "Why Choose Us",
+                    "WhyChooseUs",
                     "Portfolio",
                     "Testimonials",
                     "Team",
                     "Contact Us",
+                    "About",
+                    "Pricing",
+                    "FAQs",
+                    "Blog",
+                    "Privacy-Policy",
                   ].map((item, idx) => (
                     <Button
                       as={Link}
@@ -249,50 +254,105 @@ function Hero() {
         </Box>
 
         {/* Hero Section */}
-        <Box color="white" minH="100vh" px={{ base: 6, md: 16 }} py={10}>
+        <Box
+          color="white"
+          minH="100vh"
+          px={{ base: 6, md: 16 }}
+          py={10}
+          display="flex"
+          alignItems="center"
+        >
           <Flex
+            direction={{ base: "column", md: "row" }}
             alignItems="center"
-            justifyContent="space-between"
-            flexDirection={{ base: "column", md: "row" }}
-            maxW="1200px"
+            justifyContent="center"
+            maxW="1400px"
             mx="auto"
+            w="100%"
           >
-            {/* AI Illustration */}
-            <Box flex="1">
-              <Image src={illustration} alt="Illustration" maxW="100%" />
-            </Box>
+            {/* Illustration Image */}
+            {isMobile ? (
+              ""
+            ) : (
+              <Box
+                flex="1"
+                textAlign="center"
+                mb={{ base: 8, md: 0 }}
+                maxW="50%"
+                pr={{ md: 10 }} // Adds space between the image and the text
+              >
+                <Image
+                  src={illustration} // Replace with your image URL
+                  alt="AI Illustration"
+                  borderRadius="10px"
+                  boxShadow="lg"
+                  maxW="100%" // Ensures the image stays responsive
+                />
+              </Box>
+            )}
 
             {/* Text Content */}
-            <VStack align="start" spacing={6} textAlign="left">
-              <Heading as="h1" size="2xl" fontWeight="bold">
+            <VStack
+              align={{ base: "center", md: "flex-start" }}
+              spacing={6}
+              textAlign={{ base: "center", md: "left" }}
+              flex="1"
+              maxW={{ base: "100%", md: "50%" }}
+            >
+              <Heading
+                as="h1"
+                size="2xl"
+                fontWeight="bold"
+                lineHeight="shorter"
+                maxW="500px"
+              >
                 Delivering Superior Services
               </Heading>
               <Text fontSize="3xl" color="blue.300" fontWeight="bold">
                 IT Solutions.
               </Text>
-              <Text fontSize="lg" maxW="500px" color="gray.300">
-                Customizable SEO-friendly templates for any design.
+              <Text fontSize="lg" color="gray.300" maxW="500px">
+                You can easily change any design to your own. It is highly
+                customizable and SEO-friendly.
               </Text>
 
               {/* Action Buttons */}
               <HStack spacing={4}>
-                <Button size="lg" colorScheme="blue">
+                <Button
+                  size="lg"
+                  colorScheme="blue"
+                  bg="blue.400"
+                  _hover={{ bg: "blue.500" }}
+                >
                   Get Quotes
                 </Button>
-                <Button size="lg" variant="outline" colorScheme="blue">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  colorScheme="blue"
+                  borderColor="blue.400"
+                  _hover={{ bg: "blue.500", color: "white" }}
+                >
                   Get Started
                 </Button>
               </HStack>
 
               {/* Social Icons */}
-              <HStack spacing={6}>
-                {[FaXTwitter, FaFacebook, FaLinkedin, FaInstagram].map(
-                  (IconComponent, idx) => (
-                    <ChakraLink key={idx} href="#" isExternal>
-                      <Icon as={IconComponent} boxSize={6} />
-                    </ChakraLink>
-                  )
-                )}
+              <HStack spacing={6} pt={4}>
+                {[
+                  { icon: FaXTwitter, link: "#" },
+                  { icon: FaFacebook, link: "#" },
+                  { icon: FaLinkedin, link: "#" },
+                  { icon: FaInstagram, link: "#" },
+                ].map(({ icon, link }, idx) => (
+                  <ChakraLink key={idx} href={link} isExternal>
+                    <Icon
+                      as={icon}
+                      boxSize={6}
+                      _hover={{ color: "blue.400" }}
+                    />
+                  </ChakraLink>
+                ))}
               </HStack>
             </VStack>
           </Flex>

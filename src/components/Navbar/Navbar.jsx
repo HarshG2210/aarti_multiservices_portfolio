@@ -13,6 +13,7 @@ import {
   Image,
   VStack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import { FaEnvelope } from "react-icons/fa"; // Import the envelope icon
@@ -24,6 +25,7 @@ import { useMediaQueryContext } from "../../context/MediaQueryContext";
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra hook to handle drawer state
   const { isMobile } = useMediaQueryContext(); // Use both mobile and tablet queries
+  const toast = useToast();
 
   const handleGetQuoteClick = () => {
     // Trigger the mailto link when the "Get Quote" button is clicked
@@ -94,60 +96,46 @@ function Navbar() {
       {/* Fullscreen Drawer Menu */}
       <Drawer
         isOpen={isOpen}
-        placement="left" // Opens from the left side
+        placement="left"
         onClose={onClose}
-        size="full" // Full-screen drawer
-        bg="#E2E8F0"
+        size={{ base: "sm", md: "sm", lg: "lg" }}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerBody>
-            {/* Menu items in the drawer */}
             <VStack spacing={6} mt={10} align="center">
-              <Button
-                as={Link}
-                to="/Services"
-                colorScheme="teal"
-                onClick={onClose}
-              >
-                Our Services
-              </Button>
-              <Button
-                as={Link}
-                to="/whyChooseUs"
-                colorScheme="teal"
-                onClick={onClose}
-              >
-                Why Choose Us
-              </Button>
-              <Button
-                as={Link}
-                to="/portfolio"
-                colorScheme="teal"
-                onClick={onClose}
-              >
-                Portfolio
-              </Button>
-              <Button
-                as={Link}
-                to="/testimonials"
-                colorScheme="teal"
-                onClick={onClose}
-              >
-                Testimonials
-              </Button>
-              <Button as={Link} to="/team" colorScheme="teal" onClick={onClose}>
-                Meet My Team
-              </Button>
-              <Button
-                as={Link}
-                to="/contactUs"
-                colorScheme="teal"
-                onClick={onClose}
-              >
-                Contact Us
-              </Button>
+              {[
+                "Services",
+                "WhyChooseUs",
+                "Portfolio",
+                "Testimonials",
+                "Team",
+                "Contact Us",
+                "About",
+                "Pricing",
+                "FAQs",
+                "Blog",
+                "Privacy-Policy",
+              ].map((item, idx) => (
+                <Button
+                  as={Link}
+                  to={`/${item.toLowerCase().replace(" ", "")}`}
+                  colorScheme="teal"
+                  key={idx}
+                  onClick={() => {
+                    onClose();
+                    toast({
+                      title: `${item} Clicked`,
+                      status: "info",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                  }}
+                >
+                  {item}
+                </Button>
+              ))}
             </VStack>
           </DrawerBody>
         </DrawerContent>
