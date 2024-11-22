@@ -86,9 +86,16 @@ function Services() {
 
   return (
     <Box bg="gray.50" p={10} id="services">
-      <Heading textAlign="center" mb={10} color="blue.600">
-        Our Services
-      </Heading>
+      <VStack spacing={4} mb={12} textAlign="center">
+        <Heading color="blue.600" fontSize={{ base: "2xl", md: "3xl" }}>
+          Our Services
+        </Heading>
+        <Text color="orange.500" maxW="3xl">
+          Explore our wide range of services designed to meet your unique needs
+          and help you achieve your goals.
+        </Text>
+      </VStack>
+
       <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={8}>
         {services.map((service, index) => (
           <motion.div

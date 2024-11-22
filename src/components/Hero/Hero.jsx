@@ -235,10 +235,10 @@ function Hero() {
               </Heading>
               <motion.div
                 key={currentService}
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ duration: 1, type: "spring", stiffness: 50 }}
+                initial={{ opacity: 0, x: 100 }} // Start from the right (off-screen)
+                whileInView={{ opacity: 1, x: 0 }} // Move to the center when in view
+                viewport={{ once: false, margin: "-50px" }} // Triggers when the element enters the viewport
+                transition={{ duration: 1 }} // Duration for the animation
               >
                 <Text fontSize="3xl" color="blue.300" fontWeight="bold">
                   {services[currentService]}

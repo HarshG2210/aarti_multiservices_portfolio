@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Box,
-  Heading,
-  Text,
   Avatar,
-  VStack,
+  Box,
   HStack,
+  Heading,
   Icon,
   SimpleGrid,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FaQuoteLeft, FaQuoteRight, FaStar } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const testimonials = [
   {
@@ -64,12 +64,15 @@ function Testimonials() {
 
   return (
     <Box textAlign="center" py={10} px={5} bg="gray.50">
-      <Heading color="blue.600" fontSize="3xl">
-        Testimonials
-      </Heading>
-      <Text color="orange.400" fontSize="md" mb={6}>
-        Lorem ipsum dolor sit amet
-      </Text>
+      <VStack spacing={4} mb={12} textAlign="center">
+        <Heading color="blue.600" fontSize={{ base: "2xl", md: "3xl" }}>
+          Testimonials
+        </Heading>
+        <Text color="orange.500" maxW="3xl">
+          Hear from our satisfied clients about how our services have made a
+          positive impact on their success and growth.
+        </Text>
+      </VStack>
 
       {/* Testimonials Grid with Slide Animation */}
       <SimpleGrid
