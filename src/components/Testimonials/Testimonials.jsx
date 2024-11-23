@@ -1,151 +1,210 @@
-import { AnimatePresence, motion } from "framer-motion";
 import {
   Avatar,
   Box,
-  HStack,
-  Heading,
+  Center,
   Icon,
-  SimpleGrid,
+  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FaQuoteLeft, FaQuoteRight, FaStar } from "react-icons/fa";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
+import { motion } from "framer-motion";
+import place_holder_img from "../../assets/images/placeholderimage/placeholder_img.png";
 
 const testimonials = [
   {
-    name: "Fizzi Brandon",
+    name: "John Doe",
+    role: "Customer",
+    image: place_holder_img,
+    text: "I knew I was going to get great service, but they went above and beyond my expectations.",
+  },
+  {
+    name: "Asa Walter",
+    role: "Business Owner",
+    image: place_holder_img,
+    text: "This is the best thing that happened to my small business. They re-branded, re-organized, and re-vamped my company in no time.",
+  },
+  {
+    name: "Zahid Miles",
     role: "Freelancer",
-    image: "https://via.placeholder.com/150",
-    text: "Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.",
+    image: place_holder_img,
+    text: "They are great. They did exactly what I needed. The friendly chaps are real problem solvers. Loved working with them.",
   },
   {
-    name: "Jhonne Doe",
-    role: "CFO",
-    image: "https://via.placeholder.com/150",
-    text: "Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam.",
+    name: "Casper Leigh",
+    role: "Entrepreneur",
+    image: place_holder_img,
+    text: "Awesome services. I am really happy to be here because of their services. I will continue to use their services in the future.",
   },
   {
-    name: "Afa Rose",
-    role: "Web Designer",
-    image: "https://via.placeholder.com/150",
-    text: "Maecen aliquam donec porttitora entum suscipit rhoncus. Accusantium quam.",
+    name: "John Doe",
+    role: "Customer",
+    image: place_holder_img,
+    text: "I knew I was going to get great service, but they went above and beyond my expectations.",
   },
   {
-    name: "Emily Stone",
-    role: "Product Manager",
-    image: "https://via.placeholder.com/150",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies.",
+    name: "Asa Walter",
+    role: "Business Owner",
+    image: place_holder_img,
+    text: "This is the best thing that happened to my small business. They re-branded, re-organized, and re-vamped my company in no time.",
   },
   {
-    name: "Daniel Lee",
-    role: "UI/UX Designer",
-    image: "https://via.placeholder.com/150",
-    text: "Etiam sit amet orci eget eros faucibus tincidunt. Duis leo.",
+    name: "Zahid Miles",
+    role: "Freelancer",
+    image: place_holder_img,
+    text: "They are great. They did exactly what I needed. The friendly chaps are real problem solvers. Loved working with them.",
   },
   {
-    name: "Sophia Brown",
-    role: "Engineer",
-    image: "https://via.placeholder.com/150",
-    text: "Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales.",
+    name: "Casper Leigh",
+    role: "Entrepreneur",
+    image: place_holder_img,
+    text: "Awesome services. I am really happy to be here because of their services. I will continue to use their services in the future.",
   },
 ];
 
-function Testimonials() {
-  const [currentPage, setCurrentPage] = useState(0);
+const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  // Update the current page every 2 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPage((prevPage) => (prevPage + 1) % testimonials.length);
-    }, 2000);
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    // Simulate a data fetch
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds delay for demonstration
   }, []);
 
+  useEffect(() => {
+    const updateSlidesToShow = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesToShow(3); // Desktop: Show 3 cards
+      } else if (width >= 768) {
+        setSlidesToShow(2); // Tablet: Show 2 cards
+      } else {
+        setSlidesToShow(1); // Mobile: Show 1 card
+      }
+    };
+
+    updateSlidesToShow();
+    window.addEventListener("resize", updateSlidesToShow);
+
+    return () => window.removeEventListener("resize", updateSlidesToShow);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slidesToShow]);
+
+  if (loading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
+
   return (
-    <Box textAlign="center" py={10} px={5} bg="gray.50">
-      <VStack spacing={4} mb={12} textAlign="center">
-        <Heading color="blue.600" fontSize={{ base: "2xl", md: "3xl" }}>
+    <Box
+      bg="gray.50"
+      py={[8, 12, 16]}
+      px={[4, 8, 16]}
+      rounded="lg"
+      boxShadow="sm"
+      position="relative"
+    >
+      {/* Title Section */}
+      {/* Title */}
+      <VStack spacing={4} mb={12}>
+        <Text fontSize="2xl" color="blue.600" fontWeight="bold">
           Testimonials
-        </Heading>
-        <Text color="orange.500" maxW="3xl">
+        </Text>
+        <Text color="orange.500" maxW="3xl" textAlign={"center"}>
           Hear from our satisfied clients about how our services have made a
           positive impact on their success and growth.
         </Text>
       </VStack>
 
-      {/* Testimonials Grid with Slide Animation */}
-      <SimpleGrid
-        columns={{ base: 1, md: 1, lg: 1 }}
-        spacing={10}
-        maxW="1000px"
-        mx="auto"
-      >
-        <AnimatePresence initial={false}>
-          {testimonials
-            .slice(currentPage, currentPage + 1)
-            .map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-              >
-                <VStack
-                  bg="white"
-                  borderRadius="lg"
+      {/* Testimonials Slider */}
+      <Box position="relative" maxW="100%" mx="auto" overflow="hidden">
+        <motion.div
+          style={{
+            display: "flex",
+            gap: "1rem", // Reduced gap for smaller screens
+            transform: `translateX(-${(currentIndex / slidesToShow) * 100}%)`,
+            transition: "transform 0.8s ease",
+          }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <Box
+              key={index}
+              flex={`0 0 ${100 / slidesToShow}%`}
+              bg="white"
+              borderRadius="lg"
+              boxShadow="lg"
+              p={[6, 8]} // Adjust padding for smaller screens
+              textAlign="center"
+              position="relative"
+              overflow="hidden"
+              zIndex={index === currentIndex ? 1 : 0} // Ensure the active testimonial has a higher z-index
+            >
+              <Icon
+                as={FaQuoteLeft}
+                boxSize={["100px", "150px", "200px"]}
+                color="gray.200"
+                position="absolute"
+                top={["-20px", "-30px", "-40px"]}
+                left={["-20px", "-30px", "-40px"]}
+                zIndex="0"
+              />
+              <VStack spacing={[4, 6]} zIndex="1" position="relative">
+                <Avatar
+                  src={testimonial.image}
+                  size={["md", "lg", "xl"]}
                   boxShadow="md"
-                  p={6}
-                  spacing={4}
-                  align="center"
+                />
+                <Text
+                  fontWeight="bold"
+                  fontSize={["md", "lg"]}
+                  color="gray.700"
                 >
-                  <Avatar src={testimonial.image} size="xl" />
-                  <VStack spacing={1} textAlign="center">
-                    <Text fontWeight="bold" fontSize="xl" color="blue.700">
-                      {testimonial.name}
-                    </Text>
-                    <Text fontSize="sm" color="gray.500">
-                      {testimonial.role}
-                    </Text>
-                    <HStack spacing={1} color="yellow.400">
-                      {Array(5)
-                        .fill("")
-                        .map((_, i) => (
-                          <Icon as={FaStar} key={i} />
-                        ))}
-                    </HStack>
-                  </VStack>
-                  <HStack color="blue.500">
-                    <Icon as={FaQuoteLeft} boxSize={5} />
-                    <Text fontSize="md" color="gray.600" textAlign="center">
-                      {testimonial.text}
-                    </Text>
-                    <Icon as={FaQuoteRight} boxSize={5} />
-                  </HStack>
-                </VStack>
-              </motion.div>
-            ))}
-        </AnimatePresence>
-      </SimpleGrid>
-
-      {/* Pagination Dots */}
-      <HStack justify="center" mt={8}>
-        {testimonials.map((_, index) => (
-          <Box
-            key={index}
-            w={3}
-            h={3}
-            borderRadius="full"
-            bg={currentPage === index ? "blue.600" : "gray.300"}
-            mx={1}
-            onClick={() => setCurrentPage(index)}
-            cursor="pointer"
-          />
-        ))}
-      </HStack>
+                  {testimonial.name}
+                </Text>
+                <Text
+                  fontSize={["sm", "md"]}
+                  fontWeight="medium"
+                  color="gray.500"
+                >
+                  {testimonial.role}
+                </Text>
+                <Text
+                  fontSize={["sm", "md"]}
+                  color="gray.600"
+                  lineHeight="tall"
+                >
+                  {testimonial.text}
+                </Text>
+              </VStack>
+              <Icon
+                as={FaQuoteRight}
+                boxSize={["100px", "150px", "200px"]}
+                color="gray.200"
+                position="absolute"
+                bottom={["-20px", "-30px", "-40px"]}
+                right={["-20px", "-30px", "-40px"]}
+                zIndex="0"
+              />
+            </Box>
+          ))}
+        </motion.div>
+      </Box>
     </Box>
   );
-}
+};
 
 export default Testimonials;
