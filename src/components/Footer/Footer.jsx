@@ -8,7 +8,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   SimpleGrid,
   Stack,
   Text,
@@ -22,9 +21,10 @@ import {
   FaMapMarker,
   FaPaperPlane,
   FaPhoneAlt,
-  FaTwitter,
 } from "react-icons/fa";
 
+import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import backgroundImageUrl from "../../assets/images/footer-background.png";
 import logoUrl from "../../assets/images/amslogo.png";
 
@@ -38,7 +38,6 @@ const Footer = () => {
       py={10}
       textAlign="center"
       minH={{ base: "70vh", md: "60vh", lg: "65vh" }}
-      bg={"black"}
     >
       {/* Background image overlay with opacity */}
       <Box
@@ -51,8 +50,8 @@ const Footer = () => {
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"
-        opacity="0.2"
-        zIndex="1"
+        opacity="0.3"
+        zIndex="-1"
       />
       <Flex
         alignItems={{ base: "flex-start", md: "center" }}
@@ -81,7 +80,7 @@ const Footer = () => {
             <Text
               fontSize="sm"
               fontWeight="bold"
-              color={"#fff"}
+              color={"#000"}
               textAlign={"center"}
               px={{ base: 4, md: 0 }}
             >
@@ -90,21 +89,21 @@ const Footer = () => {
               infrastructure, IT, marketing, and more.
             </Text>
 
-            <Text fontSize="sm" fontWeight="bold" color={"#fff"}>
+            <Text fontSize="sm" fontWeight="bold" color={"#000"}>
               Follow us
             </Text>
             <Flex gap={3}>
-              <Link href="#">
-                <Icon as={FaTwitter} fontSize="lg" color={"#fff"} />
+              <Link href="https://x.com/i/flow/login?redirect_after_login=%2FAarti_pvtltd">
+                <Icon as={FaXTwitter} fontSize="lg" color={"#000"} />
               </Link>
-              <Link href="#">
-                <Icon as={FaFacebook} fontSize="lg" color={"#fff"} />
+              <Link href="https://www.facebook.com/people/Aarti-Multi-Services-Pvt-Ltd/61557349604456/">
+                <Icon as={FaFacebook} fontSize="lg" color={"#000"} />
               </Link>
-              <Link href="#">
-                <Icon as={FaInstagram} fontSize="lg" color={"#fff"} />
+              <Link href="https://www.instagram.com/aartimultiservicespvt.ltd/?igsh=MWIxcHB0ZDlodjAwcg%3D%3D">
+                <Icon as={FaInstagram} fontSize="lg" color={"#000"} />
               </Link>
-              <Link href="#">
-                <Icon as={FaLinkedin} fontSize="lg" color={"#fff"} />
+              <Link href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQH4YPdQ0BAoiwAAAZENbYUYCofqYJ-j2Rxpp0z6SW9RUYTFu4ZxQL2tCow09LwFZS_H-s9JQ3zNDA4MOXattkTgA_BX9Ep6sOz078m2aio_ZleNE7YH5lK_TVtB_xRyZqRQX9c=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F102035662%2Fadmin%2Ffeed%2Fposts%2F%3FfeedType%3Dfollowing">
+                <Icon as={FaLinkedin} fontSize="lg" color={"#000"} />
               </Link>
             </Flex>
           </Stack>
@@ -112,23 +111,30 @@ const Footer = () => {
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Services
             </Text>
-            <Link color="#fff" fontWeight="bold">
-              Web Design
+            <Link to={"/it-solution"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                IT Solution
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              App Development
+            <Link to={"/loan"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Loan
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Cloud Services
+            <Link to={"/advertisement"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Advertisement
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Domain And Hosting
+            <Link to={"/infrastructure"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Infrastructure
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              SEO Optimization
-            </Link>
-            <Link color="#fff" fontWeight="bold">
-              Social Media
+            <Link to={"/solar"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Solar
+              </Text>
             </Link>
           </Stack>
 
@@ -136,29 +142,45 @@ const Footer = () => {
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Information
             </Text>
-            <Link color="#fff" fontWeight="bold" href="/about">
-              About
+            <Link to={"/about"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                About
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Pricing
+            <Link to={"/pricing"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Pricing
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Team
+            <Link to={"/team"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Team
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Portfolio
+            <Link to={"/portfolio"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Portfolio
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              FAQs
+            <Link to={"/faqs"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                FAQs
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Blogs
+            <Link to={"/blog"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Blogs
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Coming Soon
+            <Link to={"#"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Coming Soon
+              </Text>
             </Link>
-            <Link color="#fff" fontWeight="bold">
-              Privacy Policy
+            <Link to={"/privacy-policy"} color="#000" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="light" color="black">
+                Privacy Policy
+              </Text>
             </Link>
           </Stack>
 
@@ -166,15 +188,15 @@ const Footer = () => {
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
               Contacts
             </Text>
-            <Flex align="center" color="#fff" fontWeight="bold">
+            <Flex align="center" color="#000" fontWeight="bold">
               <Icon as={FaMapMarker} mr={2} /> Flat No. 101, Prathamesh Plaza,
               Unthkhana Road, Above Peter England Showroom, Medical sq., Nagpur,
               440009.
             </Flex>
-            <Flex align="center" color="#fff" fontWeight="bold">
+            <Flex align="center" color="#000" fontWeight="bold">
               <Icon as={FaPhoneAlt} mr={2} /> +91 9067000315 / +91 9067000316
             </Flex>
-            <Flex align="center" color="#fff" fontWeight="bold">
+            <Flex align="center" color="#000" fontWeight="bold">
               <Icon as={FaEnvelope} mr={2} /> info@aartimultiservices.com
             </Flex>
             <Text fontSize="lg" fontWeight="bold" color="blue.500">
@@ -187,7 +209,7 @@ const Footer = () => {
               <Input placeholder="Email Address" size="md" borderRadius="md" />
               <InputRightElement
                 // eslint-disable-next-line react/no-children-prop
-                children={<Icon as={FaPaperPlane} color={"#fff"} />}
+                children={<Icon as={FaPaperPlane} color={"#000"} />}
               />
             </InputGroup>
           </Stack>
@@ -197,7 +219,7 @@ const Footer = () => {
       <Text
         fontSize="xs"
         mt={5}
-        color={"#fff"}
+        color={"#000"}
         fontWeight="bold"
         border={"1px sloid red"}
       >

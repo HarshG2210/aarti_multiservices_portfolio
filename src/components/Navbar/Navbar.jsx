@@ -20,10 +20,8 @@ import {
   FaBars,
   FaBlog,
   FaCogs,
-  FaComments,
   FaEnvelope,
   FaFileAlt,
-  FaInfo,
   FaListAlt,
   FaMoneyBill,
   FaQuestionCircle,
@@ -67,9 +65,7 @@ function Navbar() {
   // Menu items with labels, icons, and routing
   const menuItems = [
     { label: "Services", icon: FaCogs, to: "/services" },
-    { label: "Why Choose Us", icon: FaInfo, to: "/whyChooseUs" },
     { label: "Portfolio", icon: FaListAlt, to: "/portfolio" },
-    { label: "Testimonials", icon: FaComments, to: "/testimonials" },
     { label: "Team", icon: FaUsers, to: "/team" },
     { label: "Pricing", icon: FaMoneyBill, to: "/pricing" },
     { label: "FAQs", icon: FaQuestionCircle, to: "/faqs" },
