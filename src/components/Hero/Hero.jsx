@@ -235,15 +235,16 @@ function Hero() {
               </Heading>
               <motion.div
                 key={currentService}
-                initial={{ opacity: 0, x: 100 }} // Start from the right (off-screen)
-                whileInView={{ opacity: 1, x: 0 }} // Move to the center when in view
-                viewport={{ once: false, margin: "-50px" }} // Triggers when the element enters the viewport
-                transition={{ duration: 1 }} // Duration for the animation
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-50px" }}
+                transition={{ duration: 1 }}
               >
                 <Text fontSize="3xl" color="blue.300" fontWeight="bold">
                   {services[currentService]}
                 </Text>
               </motion.div>
+
               <Text fontSize="lg" color="gray.300" maxW="500px">
                 Transform your business with innovative IT solutions, strong
                 infrastructure, effective marketing, sustainable solar energy,

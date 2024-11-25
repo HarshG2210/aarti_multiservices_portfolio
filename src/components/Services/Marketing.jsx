@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  ButtonGroup,
   Center,
   Divider,
   Grid,
@@ -8,24 +10,22 @@ import {
   Image,
   Spinner,
   Stack,
-  Tab,
-  TabList,
   TabPanel,
   TabPanels,
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import {
-  MdBrandingWatermark,
-  MdContentPaste,
-  MdEmail,
-  MdOutlinePublic,
-} from "react-icons/md";
 import { useEffect, useState } from "react";
 
+import branding_marketing from "../../assets/images/services_img/marketing/branding_marketing.webp";
+import content_marketing from "../../assets/images/services_img/marketing/content_marketing.webp";
+import digital_marketing from "../../assets/images/services_img/marketing/digital_marketing.webp";
+import email_marketing from "../../assets/images/services_img/marketing/email_marketing.webp";
+
 export default function Marketing() {
-    
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState(0);
+
   useEffect(() => {
     // Simulating a data fetch with setTimeout
     setTimeout(() => {
@@ -40,177 +40,132 @@ export default function Marketing() {
       </Center>
     );
   }
+
+  const tabs = [
+    {
+      title: "Digital Marketing",
+      description:
+        "We provide a comprehensive digital marketing strategy tailored to your unique business needs. From enhancing your website's search engine ranking through cutting-edge SEO techniques to leveraging social media platforms for maximum engagement, we ensure your brand achieves a strong online presence. Our data-driven approach helps attract, convert, and retain customers while maximizing ROI.",
+      image: digital_marketing,
+    },
+    {
+      title: "Content Marketing",
+      description:
+        "Our content marketing services focus on creating and distributing high-quality, valuable content that resonates with your target audience. From blog posts and infographics to videos and whitepapers, we craft engaging materials that drive traffic, generate leads, and build long-term customer relationships. Let us help you establish your brand as a thought leader in your industry.",
+      image: content_marketing,
+    },
+    {
+      title: "Email Marketing",
+      description:
+        "Reach your customers directly with our expertly designed email marketing campaigns. From personalized email templates to strategic scheduling, we deliver messages that inform, engage, and convert. Whether you're announcing a new product or nurturing leads, our campaigns are optimized for high open rates, click-throughs, and conversions.",
+      image: email_marketing,
+    },
+    {
+      title: "Branding Marketing",
+      description:
+        "Establish a powerful brand identity with our comprehensive branding marketing services. We focus on creating a consistent, memorable image across all channels that reflects your values and resonates with your audience. From logo design and messaging to brand guidelines, we ensure your brand stands out in a competitive market.",
+      image: branding_marketing,
+    },
+  ];
+
   return (
-    <Box maxW="4xl" mx="auto" p={6}>
-      {/* Main Heading */}
-      <Heading
-        as="h1"
-        fontSize={{ base: "3xl", md: "5xl" }}
-        fontWeight="bold"
-        color="black"
-        textAlign="center"
-        mb={4}
-      >
-        Marketing Services
-      </Heading>
-      <Text
-        fontSize={{ base: "lg", md: "xl" }}
-        color="gray.600"
-        textAlign="center"
-        mb={8}
-      >
-        Our marketing services are designed to help you reach your target
-        audience effectively and boost your brand visibility through strategic
-        and innovative campaigns.
-      </Text>
-
-      <Divider mb={6} />
-
-      <Tabs variant="enclosed" isFitted mb={6}>
-        <TabList
-          display="flex"
-          flexDirection={{ base: "column", md: "row" }}
-          gap={4}
-          mb={6}
+    <Box bgGradient="linear(to-b, gray.50, white)" minHeight="100vh" py={10}>
+      {/* Page Title */}
+      <Center flexDirection="column" mb={8}>
+        <Heading
+          as="h1"
+          fontSize={{ base: "3xl", md: "5xl" }}
+          fontWeight="extrabold"
+          color="blue.600"
         >
-          <Tab>
-            <MdOutlinePublic size={20} />
-            Digital Marketing
-          </Tab>
-          <Tab>
-            <MdContentPaste size={20} />
-            Content Marketing
-          </Tab>
-          <Tab>
-            <MdEmail size={20} />
-            Email Marketing
-          </Tab>
-          <Tab>
-            <MdBrandingWatermark size={20} />
-            Branding and Identity
-          </Tab>
-        </TabList>
+          Marketing Services
+        </Heading>
+        <Text
+          mt={4}
+          fontSize={{ base: "lg", md: "xl" }}
+          maxW="3xl"
+          textAlign="center"
+          color="gray.600"
+        >
+          Our marketing services are designed to help you reach your target
+          audience effectively and boost your brand visibility through strategic
+          and innovative campaigns.
+        </Text>
 
-        <TabPanels>
-          {/* Digital Marketing Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Digital Marketing</Heading>
-                  <Text>
-                    We provide a comprehensive digital marketing strategy that
-                    includes SEO, social media marketing, and content creation.
-                    Our team leverages the latest tools to help your brand grow
-                    online.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Digital Marketing"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
+        <Divider width="80%" mt={6} borderColor="purple.300" />
+      </Center>
 
-          {/* Content Marketing Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Content Marketing</Heading>
-                  <Text>
-                    Our content marketing services focus on creating engaging,
-                    valuable content tailored to your audience, driving traffic,
-                    and building long-term customer relationships.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Content Marketing"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
+      {/* Tab Section */}
+      <Box mt={16} px={8}>
+        <Tabs variant="unstyled" index={activeTab} onChange={setActiveTab}>
+          {/* ButtonGroup for Tabs */}
+          <ButtonGroup
+            overflowX="scroll"
+            spacing={{ base: 4, md: 10 }}
+            display="flex"
+            pb={4}
+            px={2}
+            sx={{
+              "::-webkit-scrollbar": { height: "8px" },
+              "::-webkit-scrollbar-thumb": {
+                background: "blue.600",
+                borderRadius: "4px",
+              },
+              "::-webkit-scrollbar-track": { background: "gray.200" },
+            }}
+          >
+            {tabs.map((tab, index) => (
+              <Button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                variant={activeTab === index ? "solid" : "outline"}
+                colorScheme="blue"
+                whiteSpace="nowrap"
+                minWidth="150px" // Set a minimum width for each button
+                width={{ base: "200px", sm: "auto" }} // Width for mobile and larger screens
+              >
+                {tab.title}
+              </Button>
+            ))}
+          </ButtonGroup>
 
-          {/* Email Marketing Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Email Marketing</Heading>
-                  <Text>
-                    We design email campaigns that resonate with your audience,
-                    providing valuable information and promoting your services
-                    effectively. Our team ensures high open rates and
-                    engagement.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Email Marketing"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
+          {/* Tab Content */}
+          <TabPanels>
+            {tabs.map((tab, index) => (
+              <TabPanel key={index}>
+                <Grid
+                  templateColumns={{ base: "1fr", md: "1fr 2fr" }} // Adjust layout
+                  alignItems="center"
+                  gap={8}
+                >
+                  {/* Left Section: Image */}
+                  <GridItem>
+                    <Image
+                      src={tab.image} // Use unique images
+                      alt={tab.title}
+                      borderRadius="lg"
+                      shadow="lg"
+                      objectFit="cover"
+                    />
+                  </GridItem>
 
-          {/* Branding and Identity Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Branding and Identity</Heading>
-                  <Text>
-                    Establish a strong brand identity with our branding
-                    services. We create a consistent and compelling image that
-                    sets you apart from the competition.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Branding and Identity"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+                  {/* Right Section: Title and Description */}
+                  <GridItem>
+                    <Stack spacing={6}>
+                      <Heading size="lg" color="blue.600">
+                        {tab.title}
+                      </Heading>
+                      <Text fontSize="lg" color="gray.600" lineHeight="1.8">
+                        {tab.description}
+                      </Text>
+                    </Stack>
+                  </GridItem>
+                </Grid>
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
+      </Box>
     </Box>
   );
 }

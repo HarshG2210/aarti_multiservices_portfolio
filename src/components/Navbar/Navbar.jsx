@@ -12,29 +12,43 @@ import {
   Image,
   Spinner,
   Text,
+  Tooltip,
   VStack,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
+import {
+  FaBars,
+  FaBlog,
+  FaCogs,
+  FaComments,
+  FaEnvelope,
+  FaFileAlt,
+  FaInfo,
+  FaListAlt,
+  FaMoneyBill,
+  FaQuestionCircle,
+  FaUsers,
+} from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-import { FaBars } from "react-icons/fa"; // Import FaBars icon
-import { FaEnvelope } from "react-icons/fa"; // Import the envelope icon
 import { Link } from "react-router-dom";
 import amslogo from "../../assets/images/amslogo.png";
 import logo from "../../assets/images/logo.png";
+import sidebar_video from "../../assets/images/sidebar_video.webm"
 import { useMediaQueryContext } from "../../context/MediaQueryContext";
 
+// Import icons
+
 function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra hook to handle drawer state
-  const { isMobile } = useMediaQueryContext(); // Use both mobile and tablet queries
-  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isMobile } = useMediaQueryContext();
   const [loading, setLoading] = useState(true);
+  const [isCollapsed] = useState(false);
+
   useEffect(() => {
-    // Simulating a data fetch with setTimeout
     setTimeout(() => {
-      setLoading(false); // Data has loaded, so we set loading to false
-    }, 2000); // 2 seconds for demonstration
+      setLoading(false);
+    }, 2000);
   }, []);
 
   if (loading) {
@@ -44,17 +58,30 @@ function Navbar() {
       </Center>
     );
   }
+
   const handleGetQuoteClick = () => {
-    // Trigger the mailto link when the "Get Quote" button is clicked
     window.location.href =
       "mailto:info@aartimultiservices.com?subject=Request for Quote&body=I would like to discuss my project needs.";
   };
+
+  // Menu items with labels, icons, and routing
+  const menuItems = [
+    { label: "Services", icon: FaCogs, to: "/services" },
+    { label: "Why Choose Us", icon: FaInfo, to: "/whyChooseUs" },
+    { label: "Portfolio", icon: FaListAlt, to: "/portfolio" },
+    { label: "Testimonials", icon: FaComments, to: "/testimonials" },
+    { label: "Team", icon: FaUsers, to: "/team" },
+    { label: "Pricing", icon: FaMoneyBill, to: "/pricing" },
+    { label: "FAQs", icon: FaQuestionCircle, to: "/faqs" },
+    { label: "Blog", icon: FaBlog, to: "/blog" },
+    { label: "Privacy Policy", icon: FaFileAlt, to: "/privacy-policy" },
+    { label: "Contact Us", icon: FaEnvelope, to: "/contactUs" },
+  ];
 
   return (
     <Box
       as="nav"
       p={4}
-      bg="gray.fg"
       position="sticky"
       top="0"
       zIndex="10"
@@ -68,9 +95,9 @@ function Navbar() {
         mx="auto"
       >
         <IconButton
-          icon={<FaBars />} // Use FaBars instead of HamburgerIcon
+          icon={<FaBars />}
           aria-label="Menu"
-          colorScheme="blue" // Change colorScheme to blue (or any other color you prefer)
+          colorScheme="blue"
           variant="outline"
           onClick={onOpen}
         />
@@ -98,140 +125,103 @@ function Navbar() {
         </Box>
       </Flex>
 
-      {/* Fullscreen Drawer Menu */}
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        size={{ base: "sm", md: "lg", lg: "lg" }}
-      >
-        <DrawerOverlay bg="rgba(23, 24, 35, 0.8)" />
-        <DrawerContent
-          m={{ base: "0", md: "10px" }}
-          maxW={{ base: "80%", md: "400px", lg: "500px" }}
-          rounded="lg"
-          boxShadow="xl"
-          overflow="hidden"
-        >
-          {/* Logo Section with Close Button */}
+      {/* Sidebar Drawer */}
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          {/* Sidebar Header */}
           <Box
-            textAlign="center"
-            py={10}
-            bg="rgba(0, 0, 0)"
+            bg="#e7eaf6"
             color="white"
+            p={4}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
             position="relative"
-            roundedTop="lg"
           >
-            <DrawerCloseButton
-              position="absolute"
-              top="8px"
-              right="8px"
-              color="white"
-              size={5}
+            <Image
+              src={amslogo}
+              alt="AMS Logo"
+              width="350px"
+              height="120px"
+              objectFit="contain"
             />
-            <Image src={amslogo} alt="Logo" mx="auto" />
+            <DrawerCloseButton
+              size="lg"
+              color="black"
+              position="absolute"
+              top="10px"
+              right="10px"
+            />
           </Box>
 
-          {/* Drawer Body Section */}
-          <DrawerBody
-            bg="gray.50"
-            px={6}
-            py={8}
-            css={{
-              overflowY: "scroll",
-              scrollbarWidth: "none", // Firefox
-              "-ms-overflow-style": "none", // IE 10+
-            }}
-            sx={{
-              "::-webkit-scrollbar": {
-                display: "none", // Chrome, Safari, Webkit browsers
-              },
-            }}
-          >
-            <VStack spacing={8} align="stretch">
-              {/* First Category */}
-              <Box>
-                <Text
-                  fontSize="lg"
-                  fontWeight="semibold"
-                  mb={4}
-                  color="gray.700"
-                >
-                  Useful Links
-                </Text>
-                <VStack spacing={4} align="stretch">
-                  {[
-                    "Services",
-                    "WhyChooseUs",
-                    "Portfolio",
-                    "Testimonials",
-                    "Team",
-                  ].map((item, idx) => (
-                    <Button
-                      as={Link}
-                      to={`/${item.toLowerCase().replace(" ", "")}`}
-                      variant="outline"
-                      colorScheme="teal"
-                      key={idx}
-                      w="50%"
-                      justifyContent="start"
-                      onClick={() => {
-                        onClose();
-                        toast({
-                          title: `${item} Clicked`,
-                          status: "info",
-                          duration: 2000,
-                          isClosable: true,
-                        });
-                      }}
-                    >
-                      {item}
-                    </Button>
-                  ))}
-                </VStack>
-              </Box>
+          <DrawerBody p={0} position="relative" overflow="hidden">
+            {/* Background Video */}
+            <Box
+              as="video"
+              autoPlay
+              loop
+              muted
+              position="absolute"
+              top="0"
+              left="0"
+              width="100%"
+              height="100%"
+              objectFit="cover"
+              opacity="0.4" // Adjust opacity as needed
+              zIndex="0"
+            >
+              <source src={sidebar_video} type="video/webm" />
+              Your browser does not support the video tag.
+            </Box>
 
-              {/* Second Category */}
-              <Box>
-                <Text
-                  fontSize="lg"
-                  fontWeight="semibold"
-                  mb={4}
-                  color="gray.700"
+            {/* Menu Items */}
+            <VStack
+              align="stretch"
+              spacing={1}
+              py={4}
+              position="relative"
+              zIndex="1"
+            >
+              {menuItems.map((item, idx) => (
+                <Tooltip
+                  key={idx}
+                  label={isCollapsed ? item.label : ""}
+                  placement="right"
+                  hasArrow
                 >
-                  Resources
-                </Text>
-                <VStack spacing={4} align="stretch">
-                  {[
-                    "Pricing",
-                    "FAQs",
-                    "Blog",
-                    "Privacy-Policy",
-                    "Contact Us",
-                  ].map((item, idx) => (
-                    <Button
-                      as={Link}
-                      to={`/${item.toLowerCase().replace(" ", "")}`}
-                      variant="outline"
-                      colorScheme="teal"
-                      key={idx}
-                      w="50%"
-                      justifyContent="start"
-                      onClick={() => {
-                        onClose();
-                        toast({
-                          title: `${item} Clicked`,
-                          status: "info",
-                          duration: 2000,
-                          isClosable: true,
-                        });
-                      }}
-                    >
-                      {item}
-                    </Button>
-                  ))}
-                </VStack>
-              </Box>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent={isCollapsed ? "center" : "start"}
+                    px={4}
+                    py={2}
+                    _hover={{ bg: "gray.100" }}
+                  >
+                    {/* Icon */}
+                    <Box
+                      as={item.icon}
+                      fontSize="xl"
+                      mr={isCollapsed ? 0 : 4}
+                      color="blue.500"
+                    />
+
+                    {/* Label with Link */}
+                    {!isCollapsed && (
+                      <Link to={item.to} onClick={onClose}>
+                        <Text
+                          flex="1"
+                          fontSize="lg"
+                          fontWeight="medium"
+                          color="gray.700"
+                        >
+                          {item.label}
+                        </Text>
+                      </Link>
+                    )}
+                  </Box>
+                </Tooltip>
+              ))}
             </VStack>
           </DrawerBody>
         </DrawerContent>

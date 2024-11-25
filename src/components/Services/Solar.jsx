@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  ButtonGroup,
   Center,
   Divider,
   Grid,
@@ -8,18 +10,21 @@ import {
   Image,
   Spinner,
   Stack,
-  Tab,
-  TabList,
   TabPanel,
   TabPanels,
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { MdBuild, MdEventAvailable, MdSolarPower } from "react-icons/md";
 import { useEffect, useState } from "react";
+
+import consultation_planning_image from "../../assets/images/services_img/solar_img/consultation_planning_image.webp";
+import maintenance_repair_image from "../../assets/images/services_img/solar_img/maintenance_repair_image.webp";
+import solar_panel_image from "../../assets/images/services_img/solar_img/solar_panel_image.webp";
 
 export default function Solar() {
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState(0);
+
   useEffect(() => {
     // Simulating a data fetch with setTimeout
     setTimeout(() => {
@@ -34,167 +39,127 @@ export default function Solar() {
       </Center>
     );
   }
+
+  const tabs = [
+    {
+      title: "Solar Panel Installation",
+      description:
+        "Upgrade your home's energy efficiency with our tailored solar installation services. Enjoy reduced energy bills, a lower carbon footprint, and increased property value. Our team manages everything from design to installation for seamless, reliable solar power.",
+      image: solar_panel_image,
+    },
+    {
+      title: "Maintenance & Repair",
+      description:
+        "Ensure your solar system operates at peak efficiency with our maintenance services. We provide inspections, cleaning, and repairs to maximize energy savings and extend the system's lifespan.",
+      image: maintenance_repair_image,
+    },
+    {
+      title: "Consultation & Planning",
+      description:
+        "Start your solar journey with expert consultation and planning. We assess your energy needs and design customized solutions to optimize savings and sustainability.",
+      image: consultation_planning_image,
+    },
+  ];
+
   return (
-    <Box maxW="4xl" mx="auto" p={6}>
-      {/* Main Heading */}
-      <Heading
-        as="h1"
-        fontSize={{ base: "3xl", md: "5xl" }}
-        fontWeight="bold"
-        color="black"
-        textAlign="center"
-        mb={4}
-      >
-        AMS Solar Solutions
-      </Heading>
-      <Text
-        fontSize={{ base: "lg", md: "xl" }}
-        color="gray.600"
-        textAlign="center"
-        mb={8}
-      >
-        Harness the power of the sun with our efficient solar energy solutions.
-        Save on energy bills, reduce your carbon footprint, and enjoy
-        sustainable living with clean, renewable energy for your home or
-        business.
-      </Text>
-
-      <Divider mb={6} />
-
-      <Tabs variant="enclosed" isFitted mb={6}>
-        <TabList
-          display="flex"
-          flexDirection={{ base: "column", md: "row" }}
-          gap={4}
-          mb={6}
+    <Box bgGradient="linear(to-b, gray.50, white)" minHeight="100vh" py={10}>
+      {/* Page Title */}
+      <Center flexDirection="column" mb={8}>
+        <Heading
+          as="h1"
+          fontSize={{ base: "3xl", md: "5xl" }}
+          fontWeight="extrabold"
+          color="blue.600"
         >
-          <Tab>
-            <MdSolarPower size={20} />
-            Solar Panel Installation
-          </Tab>
-          <Tab>
-            <MdBuild size={20} />
-            Maintenance & Repair
-          </Tab>
-          <Tab>
-            <MdEventAvailable size={20} />
-            Consultation & Planning
-          </Tab>
-        </TabList>
+          AMS Solar Solutions
+        </Heading>
+        <Text
+          mt={4}
+          fontSize={{ base: "lg", md: "xl" }}
+          maxW="3xl"
+          textAlign="center"
+          color="gray.600"
+        >
+          Harness the power of the sun with our efficient solar energy
+          solutions. Save on energy bills, reduce your carbon footprint, and
+          enjoy sustainable living with clean, renewable energy for your home or
+          business.
+        </Text>
 
-        <TabPanels>
-          {/* Solar Panel Installation Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Residential Solar Installation</Heading>
-                  <Text>
-                    Elevate your home&apos;s energy efficiency with our
-                    residential solar installation services. We provide a
-                    personalized approach to designing and installing a solar
-                    system tailored to your home&apos;s energy needs and roof
-                    specifications. Enjoy significant savings on your energy
-                    bills, reduce your carbon footprint, and increase your
-                    property&apos;s value with clean, renewable energy. Our
-                    expert team handles every step of the process—from initial
-                    consultation and design to professional installation and
-                    maintenance—to ensure you experience seamless, reliable
-                    solar power for years to come.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Solar Panel Installation"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
+        <Divider width="80%" mt={6} borderColor="purple.300" />
+      </Center>
 
-          {/* Maintenance & Repair Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Commercial Solar Setup</Heading>
-                  <Text>
-                    Transform your business with a tailored commercial solar
-                    setup designed to optimize energy efficiency and reduce
-                    operational costs. Our service includes a comprehensive
-                    analysis of your energy needs, customized solar panel
-                    installation, and integration with your existing
-                    infrastructure. Benefit from substantial savings on energy
-                    bills, enhance your company&apos;s sustainability, and take
-                    advantage of available incentives and tax benefits. Our
-                    expert team ensures a smooth installation process and
-                    ongoing support, helping your business harness the power of
-                    solar energy for a greener, more cost-effective future.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Maintenance & Repair"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
+      {/* Tab Section */}
+      <Box mt={16} px={8}>
+        <Tabs variant="unstyled" index={activeTab} onChange={setActiveTab}>
+          {/* ButtonGroup for Tabs */}
+          <ButtonGroup
+            overflowX="scroll"
+            spacing={{ base: 4, md: 10 }}
+            display="flex"
+            pb={4}
+            px={2}
+            sx={{
+              "::-webkit-scrollbar": { height: "8px" },
+              "::-webkit-scrollbar-thumb": {
+                background: "blue.600",
+                borderRadius: "4px",
+              },
+              "::-webkit-scrollbar-track": { background: "gray.200" },
+            }}
+          >
+            {tabs.map((tab, index) => (
+              <Button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                variant={activeTab === index ? "solid" : "outline"}
+                colorScheme="blue"
+                whiteSpace="nowrap"
+                minWidth="150px" // Set a minimum width for each button
+                width={{ base: "200px", sm: "auto" }} // Width for mobile and larger screens
+              >
+                {tab.title}
+              </Button>
+            ))}
+          </ButtonGroup>
 
-          {/* Consultation & Planning Tab */}
-          <TabPanel>
-            <Grid
-              templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-              gap={6}
-            >
-              <GridItem>
-                <Stack spacing={4}>
-                  <Heading size="sm">Solar Maintenance</Heading>
-                  <Text>
-                    Regular solar maintenance is essential to ensure your system
-                    operates at peak efficiency and delivers maximum energy
-                    savings. Our comprehensive maintenance services include
-                    routine inspections, cleaning of solar panels, and system
-                    performance checks to prevent potential issues and extend
-                    the lifespan of your investment. By keeping your panels free
-                    from dirt, debris, and any technical faults, we help you get
-                    the most out of your solar system while reducing energy
-                    costs and maintaining sustainability. Let us take care of
-                    your solar maintenance needs for long-term, reliable energy
-                    performance.
-                  </Text>
-                </Stack>
-              </GridItem>
-              <GridItem>
-                <Image
-                  src="https://via.placeholder.com/500x300"
-                  alt="Consultation & Planning"
-                  borderRadius="lg"
-                  objectFit="cover"
-                  width="100%"
-                  height="auto"
-                />
-              </GridItem>
-            </Grid>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          {/* Tab Content */}
+          <TabPanels>
+            {tabs.map((tab, index) => (
+              <TabPanel key={index}>
+                <Grid
+                  templateColumns={{ base: "1fr", md: "1fr 2fr" }} // Adjust layout
+                  alignItems="center"
+                  gap={8}
+                >
+                  {/* Left Section: Image */}
+                  <GridItem>
+                    <Image
+                      src={tab.image} // Use unique images
+                      alt={tab.title}
+                      borderRadius="lg"
+                      shadow="lg"
+                      objectFit="cover"
+                    />
+                  </GridItem>
+
+                  {/* Right Section: Title and Description */}
+                  <GridItem>
+                    <Stack spacing={6}>
+                      <Heading size="lg" color="blue.600">
+                        {tab.title}
+                      </Heading>
+                      <Text fontSize="lg" color="gray.600" lineHeight="1.8">
+                        {tab.description}
+                      </Text>
+                    </Stack>
+                  </GridItem>
+                </Grid>
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
+      </Box>
     </Box>
   );
 }

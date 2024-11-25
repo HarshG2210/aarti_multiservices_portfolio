@@ -10,14 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import {
-  FaClock,
-  FaDollarSign,
-  FaFileAlt,
-  FaHeadset,
-  FaLightbulb,
-  FaUserFriends,
-} from "react-icons/fa";
+import { FaClock, FaDollarSign, FaFileAlt, FaHeadset, FaLightbulb, FaUserFriends } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
@@ -27,10 +20,9 @@ function WhyChooseUs() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate a data fetch
     setTimeout(() => {
       setLoading(false);
-    }, 2000); // 2 seconds delay for demonstration
+    }, 2000);
   }, []);
 
   if (loading) {
@@ -44,20 +36,17 @@ function WhyChooseUs() {
   const leftItems = [
     {
       title: "Experience",
-      description:
-        "Years of expertise and proven strategies for innovative, reliable solutions tailored to your needs.",
+      description: "Years of expertise and proven strategies for innovative, reliable solutions tailored to your needs.",
       icon: FaFileAlt,
     },
     {
       title: "Products",
-      description:
-        "High-quality products crafted with precision to ensure excellent performance and satisfaction.",
+      description: "High-quality products crafted with precision to ensure excellent performance and satisfaction.",
       icon: FaLightbulb,
     },
     {
       title: "Approach",
-      description:
-        "Customer-first solutions designed to align with your goals and deliver results.",
+      description: "Customer-first solutions designed to align with your goals and deliver results.",
       icon: FaUserFriends,
     },
   ];
@@ -65,20 +54,17 @@ function WhyChooseUs() {
   const rightItems = [
     {
       title: "Pricing",
-      description:
-        "Competitive pricing without compromising on quality, offering great value for every budget.",
+      description: "Competitive pricing without compromising on quality, offering great value for every budget.",
       icon: FaDollarSign,
     },
     {
       title: "Delivery",
-      description:
-        "Efficient processes ensure on-time delivery while maintaining top-notch quality.",
+      description: "Efficient processes ensure on-time delivery while maintaining top-notch quality.",
       icon: FaClock,
     },
     {
       title: "Support",
-      description:
-        "Dedicated support team offering reliable assistance whenever you need it.",
+      description: "Dedicated support team offering reliable assistance whenever you need it.",
       icon: FaHeadset,
     },
   ];
@@ -88,22 +74,22 @@ function WhyChooseUs() {
       bg="gray.50"
       py={16}
       px={{ base: 6, md: 12 }}
-      key={Math.random()} // Forces remount to replay animations
+      maxW="100%"
+      overflowX="hidden"
     >
       <VStack spacing={4} mb={12} textAlign="center">
         <Heading color="blue.600" fontSize={{ base: "2xl", md: "3xl" }}>
           Why Choose Us
         </Heading>
         <Text color="orange.500" maxW="3xl">
-          Discover what makes us the trusted choice for delivering exceptional
-          solutions.
+          Discover what makes us the trusted choice for delivering exceptional solutions.
         </Text>
       </VStack>
 
       <Grid
         templateColumns={{
-          base: "1fr", // Mobile: Single column
-          md: "1fr auto 1fr", // Tablet and Desktop: Three columns
+          base: "1fr",
+          md: "1fr auto 1fr",
         }}
         gap={{ base: 6, md: 8, lg: 12 }}
         alignItems="center"
@@ -115,15 +101,15 @@ function WhyChooseUs() {
           spacing={8}
           align="flex-end"
           textAlign="right"
-          maxW={{ base: "xs", md: "lg" }}
+          maxW={{ base: "100%", md: "lg" }}
         >
           {leftItems.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -100 }} // Start off-screen to the left
-              whileInView={{ opacity: 1, x: 0 }} // Animate to the center when in view
-              viewport={{ once: false, margin: "-50px" }} // Trigger animation when in the viewport
-              transition={{ duration: 0.6, delay: index * 0.2 }} // Staggered animation
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <HStack spacing={4}>
                 <Box>
@@ -140,16 +126,16 @@ function WhyChooseUs() {
 
         {/* Center Image */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }} // Start from bottom and move upwards
-          whileInView={{ opacity: 1, y: 0 }} // Move to the center when in view
-          viewport={{ once: false, margin: "-50px" }} // Triggers when the element enters the viewport
-          transition={{ duration: 1 }} // Duration for the animation
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: "-50px" }}
+          transition={{ duration: 1 }}
         >
           <Image
             src={why_choose_us}
             alt="Why Choose Us"
             borderRadius="md"
-            boxSize={{ base: "250px", md: "200px" }}
+            boxSize={{ base: "100%", md: "200px" }}
             mx="auto"
           />
         </motion.div>
@@ -159,15 +145,15 @@ function WhyChooseUs() {
           spacing={8}
           align="flex-start"
           textAlign="left"
-          maxW={{ base: "xs", md: "lg" }}
+          maxW={{ base: "100%", md: "lg" }}
         >
           {rightItems.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: 100 }} // Start off-screen to the right
-              whileInView={{ opacity: 1, x: 0 }} // Animate to the center when in view
-              viewport={{ once: false, margin: "-50px" }} // Trigger animation when in the viewport
-              transition={{ duration: 0.6, delay: index * 0.2 }} // Staggered animation
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <HStack spacing={4}>
                 <Icon as={item.icon} boxSize={8} color="blue.500" />
